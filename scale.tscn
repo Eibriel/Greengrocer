@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dly7iychbwh5t"]
+
+[ext_resource type="Script" uid="uid://cecla7rik6qyf" path="res://scale.gd" id="1_tr8fv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pt18m"]
+albedo_color = Color(0.027451, 1, 0.105882, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tr8fv"]
+size = Vector3(0.570557, 1.13147, 0.644775)
+
+[node name="Scale" type="Node3D"]
+script = ExtResource("1_tr8fv")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40271, 0)
+size = Vector3(0.451416, 1.03003, 0.479492)
+material = SubResource("StandardMaterial3D_pt18m")
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.396766, 0)
+shape = SubResource("BoxShape3D_tr8fv")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29323, 0)
+text = "10"

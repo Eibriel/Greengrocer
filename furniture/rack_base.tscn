@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://g4mpiuv1bd8u"]
+
+[ext_resource type="Script" uid="uid://0s2dok7xpa0v" path="res://furniture/rack.gd" id="1_urm3o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm6de"]
+size = Vector3(1, 0.560822, 0.972412)
+
+[node name="Rack01" type="Node3D"]
+script = ExtResource("1_urm3o")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1, 0.0510254, 1)
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.290298, 0)
+shape = SubResource("BoxShape3D_xm6de")
+
+[node name="RackTransform" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0402029, 0)

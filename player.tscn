@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://coeaj8kxwl40n"]
+
+[ext_resource type="Script" uid="uid://cq1q8hj4ndtx3" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tvkt6"]
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 256
+collision_mask = 7
+platform_floor_layers = 4286578689
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_tvkt6")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="CharacterCamera" type="Camera3D" parent="Head"]
+unique_name_in_owner = true
+fov = 37.8493
+far = 400.0
+
+[node name="GrabPosition" type="Marker3D" parent="Head/CharacterCamera"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0750898, -0.392479, -1.60211)

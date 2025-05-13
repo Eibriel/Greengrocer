@@ -1,0 +1,185 @@
+[gd_scene load_steps=15 format=3 uid="uid://cqegxdu4a17pb"]
+
+[ext_resource type="Script" uid="uid://svlujvqug5wa" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://coeaj8kxwl40n" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://c2l2he6l5dvio" path="res://icon.svg" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://cvp3vx43a03g5" path="res://trash_can.tscn" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://dg25nnw6pwfgg" path="res://delivery_board.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://c4i3ijcoiee41" path="res://order_list.tscn" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://ciw07lrllou2u" path="res://pause_menu.tscn" id="8_efxa6"]
+[ext_resource type="PackedScene" uid="uid://c2ihi6ulqvvh6" path="res://open_sign.tscn" id="9_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dly7iychbwh5t" path="res://scale.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://8w8u2kthpwyh" path="res://furniture/diagonal_2x1.tscn" id="10_4c57u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_color = Color(0.42, 0.24626, 0.1134, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_0xm2m")
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.8998)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="FloorWalls" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="FloorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509601, -36.4698)
+use_collision = true
+size = Vector3(132.767, 1, 144.208)
+material = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="FloorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.1636, 2.37773, -36.4698)
+use_collision = true
+size = Vector3(2.43945, 4.7218, 144.208)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="FloorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.2493, 2.37773, -36.4698)
+use_collision = true
+size = Vector3(2.43945, 4.7218, 144.208)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="FloorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 2.37773, -108.652)
+use_collision = true
+size = Vector3(129.099, 4.7218, 2.62134)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="FloorWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 2.37773, 34.505)
+use_collision = true
+size = Vector3(129.099, 4.7218, 2.62134)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 1.49181, 9.84588)
+use_collision = true
+size = Vector3(129.099, 3, 0.3)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGBox3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2742, 0.596605)
+operation = 2
+use_collision = true
+size = Vector3(2.69556, 2.4516, 4.52405)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 1.49181, -10.9973)
+use_collision = true
+size = Vector3(129.099, 4.73047, 0.3)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2742, 0.648355)
+operation = 2
+use_collision = true
+size = Vector3(2.69556, 2.4516, 6.28955)
+
+[node name="Tree" type="Node3D" parent="."]
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 4.16222, -51.6899)
+use_collision = true
+size = Vector3(1.1228, 8.34082, 1)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.94406, -51.9351)
+radius = 3.93852
+
+[node name="Level01" type="Node3D" parent="."]
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Level01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.378, -0.522)
+use_collision = true
+size = Vector3(0.618164, 4.7218, 20.8896)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Level01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.378, -0.522)
+use_collision = true
+size = Vector3(0.618164, 4.7218, 20.8896)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Level01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287938, 2.378, -4.15516)
+use_collision = true
+size = Vector3(18.3389, 4.7218, 0.408203)
+
+[node name="Racks" type="Node3D" parent="."]
+
+[node name="Diagonal2x2" parent="Racks" instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.842, 0, 0.316)
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="DeliveryBoard" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.70402, 0.866464, 9.54561)
+
+[node name="TrashCan" parent="." instance=ExtResource("5_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23338, 0.102706, 8.10938)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("4_1bvp3")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 24.0
+offset_right = 69.0
+offset_bottom = 47.0
+text = "$100"
+
+[node name="OrderList" parent="Control" instance=ExtResource("8_4c57u")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="PauseMenu" parent="Control" instance=ExtResource("8_efxa6")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Scale" parent="." instance=ExtResource("9_kek77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48224, 0.102704, 6.35518)
+
+[node name="OpenSign" parent="." instance=ExtResource("9_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53129, 1.50939, 10.1461)
+
+[connection signal="buy_completed" from="Control/OrderList" to="." method="_on_order_list_buy_completed"]
+[connection signal="furniture_purchased" from="Control/OrderList" to="." method="_on_order_list_furniture_purchased"]
+[connection signal="item_enabled" from="Control/OrderList" to="." method="_on_order_list_item_enabled"]

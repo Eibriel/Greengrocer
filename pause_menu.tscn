@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciw07lrllou2u"]
+
+[ext_resource type="Script" uid="uid://bsdf8twkxm5tt" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hdmo1")
+
+[node name="ResumeButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.5
+offset_top = -106.0
+offset_right = 36.5
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RESUME"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -54.0
+offset_right = 24.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "QUIT"
+
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

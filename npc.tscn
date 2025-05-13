@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxic37dug7o1e"]
+
+[ext_resource type="Script" uid="uid://dyjurohr5r4ge" path="res://npc.gd" id="1_ideak"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ideak"]
+albedo_color = Color(0.996078, 1, 0.105882, 1)
+
+[node name="NPC" type="Node3D"]
+script = ExtResource("1_ideak")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40271, 0)
+size = Vector3(0.451416, 1.03003, 0.479492)
+material = SubResource("StandardMaterial3D_ideak")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12962, 0)
+text = "Data"
+vertical_alignment = 2
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87437, 0)
+text = "Data"
+vertical_alignment = 2

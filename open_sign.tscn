@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2ihi6ulqvvh6"]
+
+[ext_resource type="Script" uid="uid://ddk5s6lq5rdak" path="res://open_sign.gd" id="1_4pqqo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jg7kn"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4pqqo"]
+size = Vector3(0.398682, 0.388916, 0.435547)
+
+[node name="OpenSign" type="Node3D"]
+script = ExtResource("1_4pqqo")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.316162, 0.224609, 0.300537)
+material = SubResource("StandardMaterial3D_jg7kn")
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0254896, 0)
+shape = SubResource("BoxShape3D_4pqqo")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.213405)
+text = "Open"

@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfvvg335rfrdl"]
+
+[ext_resource type="Script" uid="uid://b600a4utf5mob" path="res://woodbox.gd" id="1_j3mxd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j3mxd"]
+size = Vector3(1, 0.330872, 0.527588)
+
+[node name="Woodbox" type="Node3D"]
+script = ExtResource("1_j3mxd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(1, 0.0212402, 0.507568)
+
+[node name="ItemName" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.439576, 0)
+text = "ItemName
+"
+font_size = 20
+outline_size = 6
+
+[node name="ItemAmount" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.220059, 0)
+text = "ItemAmount
+"
+font_size = 20
+outline_size = 6
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175323, 0)
+shape = SubResource("BoxShape3D_j3mxd")

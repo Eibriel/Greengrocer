@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://8w8u2kthpwyh"]
+
+[ext_resource type="Script" uid="uid://buj530dabwi4b" path="res://furniture/display.gd" id="1_6sqt1"]
+[ext_resource type="PackedScene" uid="uid://g4mpiuv1bd8u" path="res://furniture/rack_base.tscn" id="1_rvr4h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvr4h"]
+size = Vector3(1, 0.70961, 0.746735)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6sqt1"]
+size = Vector3(1, 1.57734, 0.935379)
+
+[node name="Diagonal2x1" type="Node3D"]
+script = ExtResource("1_6sqt1")
+
+[node name="Racks" type="Node3D" parent="."]
+
+[node name="Rack01" parent="Racks" instance=ExtResource("1_rvr4h")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.865, -0.179)
+
+[node name="Rack02" parent="Racks" instance=ExtResource("1_rvr4h")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 1.703, -1.065)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347289, -0.143311)
+size = Vector3(1, 0.718504, 0.713379)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.789703, -1.18567)
+size = Vector3(1, 1.58832, 0.713379)
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364692, -0.138443)
+shape = SubResource("BoxShape3D_rvr4h")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.798557, -1.16048)
+shape = SubResource("BoxShape3D_6sqt1")
