@@ -11,6 +11,8 @@ var current_state := STATE.IDLE
 var idle_time := 0.0
 var searching_time := 0.0
 
+const SPEED := 2.0
+
 enum STATE {
 	IDLE,
 	WALKING_IN,
@@ -21,7 +23,6 @@ enum STATE {
 }
 
 func _ready() -> void:
-	var item_options := Items.get_available_items(Global.game_state.get_level(), true)
 	#item_options.erase(Woodbox.ITEM_TYPE.EMPTY)
 	var chance := 0.05 # Chance of predefined list
 	var level := Global.game_state.get_level()
@@ -34,8 +35,10 @@ func _ready() -> void:
 	else:
 		chance = 0.4
 	if chance > randf():
+		var item_options := Items.get_available_items(Global.game_state.get_level(), true)
+		item_options.shuffle()
+		#print(item_options)
 		for n in randi_range(1, 4):
-			item_options.shuffle()
 			shopping_list[item_options.pop_front().item_id] = randi_range(1, 12)
 	else:
 		var available_types: Array[String] = []
@@ -45,8 +48,8 @@ func _ready() -> void:
 				if available_types.has(r.current_woodbox.type): continue
 				available_types.append(r.current_woodbox.type)
 		if available_types.size() > 0:
+			available_types.shuffle()
 			for n in randi_range(1, min(4, available_types.size())):
-				available_types.shuffle()
 				shopping_list[available_types.pop_front()] = randi_range(1, 12)
 	#for sh in shopping_list:
 	#	items_grabbed[sh] = 0
@@ -57,6 +60,7 @@ func _process(delta: float) -> void:
 	match current_state:
 		STATE.IDLE:
 			var max_npcs_allowed := Global.game_state.get_npc_amount()
+			#prints(Global.get_npc_count(), max_npcs_allowed)
 			if Global.is_open and Global.get_npc_count() < max_npcs_allowed:
 				Global.game_state.set_day_stat("customer_amount", 1)
 				current_state = STATE.WALKING_IN
@@ -67,8 +71,12 @@ func _process(delta: float) -> void:
 		STATE.WALKING_IN:
 			if position.distance_to(Vector3.ZERO) < 0.5:
 				var found := false
+				#print(get_rack_list().size())
+				#for r:Rack in get_rack_list():
+					#prints("Rack!", r.has_box)
 				for r:Rack in get_rack_list():
 					if not r.has_box: continue
+					print(r.current_woodbox.type)
 					if shopping_list.has(r.current_woodbox.type):
 						selected_woodbox = r.current_woodbox
 						current_state = STATE.WALKING_TO_WOODBOX
@@ -83,6 +91,7 @@ func _process(delta: float) -> void:
 						if items_grabbed.size() > 0:
 							current_state = STATE.WALKING_TO_SCALE
 						else:
+							$Label3D2.text = "ERROR 1"
 							current_state = STATE.WALKING_OUT
 			else:
 				move_towards(Vector3.ZERO, delta)
@@ -100,6 +109,7 @@ func _process(delta: float) -> void:
 						items_prices[sw_type] = Global.game_state.get_price(sw_type)
 						current_state = STATE.GRABBING_ITEMS
 				else:
+					$Label3D2.text = "ERROR 2"
 					shopping_list.erase(sw_type)
 					check_shopping_list()
 			else:
@@ -116,14 +126,9 @@ func _process(delta: float) -> void:
 				items_grabbed[sw_type] += 1
 				selected_woodbox.remove(1)
 				if items_grabbed[sw_type] >= shopping_list[sw_type]:
+					$Label3D2.text = "ERROR 3"
 					shopping_list.erase(sw_type)
-					if shopping_list.size() > 0:
-						current_state = STATE.WALKING_IN
-					else:
-						if items_grabbed.size() > 0:
-							current_state = STATE.WALKING_TO_SCALE
-						else:
-							current_state = STATE.WALKING_OUT
+					check_shopping_list()
 			else:
 				current_state = STATE.WALKING_IN
 		STATE.WALKING_TO_SCALE:
@@ -147,8 +152,8 @@ func _process(delta: float) -> void:
 
 func get_rack_list() -> Array[Rack]:
 	var racks: Array[Rack] = []
-	for rb in Global.racks.get_children():
-		racks.append_array(rb.get_node("Racks").get_children())
+	for display in Global.racks.get_children():
+		racks.append_array(display.get_node("Racks").get_children())
 	return racks
 
 func check_shopping_list() -> void:
@@ -197,4 +202,4 @@ func is_price_ok(woodbox: Woodbox) -> bool:
 
 func move_towards(target_pos: Vector3, delta:float) -> void:
 	var direction := position.direction_to(target_pos)
-	translate(direction*1.0*delta)
+	translate(direction*SPEED*delta)

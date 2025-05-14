@@ -1,7 +1,7 @@
 extends Resource
 class_name GameState
 
-@export var money := 5000.0
+@export var money := 10000.0
 @export var prices: Dictionary[String, float]
 @export var market_prices: Dictionary[String, float]
 @export var wholesale_prices: Dictionary[String, float]
@@ -9,7 +9,7 @@ class_name GameState
 
 @export var day := 1 # Starts with 1
 @export var time := 0.0 #60.0*12.0
-@export var xp:= 0.0 #+ 4000.0
+@export var xp:= 0.0
 @export var xp_to_add:=0.0
 
 @export var shop_expansion := 0
@@ -52,8 +52,8 @@ func get_day_stat() -> DayStats:
 	return days_stats[day-1]
 
 func get_npc_amount() -> int:
-	var amount := 0
-	var level := get_level()
+	var amount := 1
+	var level := int(get_level())
 	var ll :Dictionary[int,int]= {
 		2: 2,
 		5: 3,

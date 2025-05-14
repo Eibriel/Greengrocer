@@ -87,7 +87,10 @@ func _process(delta: float) -> void:
 	match current_task:
 		TASKS.GRABBING_WOODBOX:
 			grabbed_item.get_parent_node_3d().remove_child(grabbed_item)
-			add_child(grabbed_item)
+			if grabbed_item is Display:
+				$Racks.add_child(grabbed_item)
+			else:
+				add_child(grabbed_item)
 			var grab_transform := player.get_grab_transform()
 			grabbed_item.global_transform = grab_transform
 			grabbing_item = true
@@ -109,7 +112,7 @@ func _process(delta: float) -> void:
 	
 	var time_hour := int(game_state.time / 60.0)
 	var time_minute := int(game_state.time - (time_hour*60))
-	$Control/Label.text = "$%.1f - %d - %02d:%02d - XP: %.2f - Level: %d - Stats Cust: %d - Expa: %d" % [
+	$Control/Label.text = "$%.1f - %d - %02d:%02d - XP: %.2f - Level: %.2f - Stats Cust: %d - Expa: %d" % [
 		game_state.money,
 		game_state.day,
 		(time_hour + 8),
@@ -124,7 +127,7 @@ func _process(delta: float) -> void:
 		#npc_times.pop_at(0)
 	npc_time -= delta
 	if npc_time < 0.0:
-		npc_time = randf_range(0.0, 30.0)
+		npc_time = randf_range(0.0, 15.0)
 		var new_npc := preload("res://npc.tscn").instantiate()
 		$NPCs.add_child(new_npc)
 		new_npc.position = Vector3(0,0,14)
@@ -241,12 +244,13 @@ func move_item(from: Woodbox, to: Woodbox) -> void:
 				#grabbed_item.type = Items.TYPE.EMPTY
 
 
-func _on_order_list_buy_completed(buying: Dictionary[String, float]) -> void:
+func _on_order_list_buy_completed(buying: Dictionary[String, int]) -> void:
 	for by in buying:
-		var new_box := preload("res://woodbox.tscn").instantiate()
-		new_box.add(100, by)
-		new_box.position = Vector3(randf(), 0, 12+randf())
-		add_child(new_box)
+		for _n in buying[by]:
+			var new_box := preload("res://woodbox.tscn").instantiate()
+			new_box.add(100, by)
+			new_box.position = Vector3(randf(), 0, 12+randf())
+			add_child(new_box)
 
 
 func _on_order_list_item_enabled(item: ItemRes) -> void:

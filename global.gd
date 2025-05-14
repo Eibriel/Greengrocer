@@ -6,7 +6,7 @@ var scale:Scale
 var is_open:=false
 var game_state:GameState
 
-var time_mult := 2.0
+var time_mult := 1.0
 
 func _process(delta: float) -> void:
 	if game_state.xp_to_add > 0:

@@ -135,11 +135,11 @@ func get_box_price(wi: ItemRes) -> float:
 func on_buy() -> void:
 	if Global.game_state.money >= get_total_amount():
 		Global.game_state.money -= get_total_amount()
-		var buying: Dictionary[String, float]
+		var buying: Dictionary[String, int]
 		for ba in buying_amounts:
 			if buying_amounts[ba].value > 0:
 				var wi := Items.ITEMS[ba]
-				buying[ba] = buying_amounts[ba].value * get_box_price(wi)
+				buying[ba] = int(buying_amounts[ba].value)
 			Global.game_state.xp_to_add += 5.0 * buying_amounts[ba].value
 			buying_amounts[ba].value = 0
 		buy_completed.emit(buying)

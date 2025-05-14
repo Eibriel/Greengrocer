@@ -122,8 +122,11 @@ size = Vector3(18.3389, 4.7218, 0.408203)
 
 [node name="Racks" type="Node3D" parent="."]
 
-[node name="Diagonal2x2" parent="Racks" instance=ExtResource("10_4c57u")]
+[node name="Diagonal2x1_1" parent="Racks" instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.842, 0, 0.316)
+
+[node name="Diagonal2x1_2" parent="Racks" instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49227, 0, 0.316)
 
 [node name="NPCs" type="Node3D" parent="."]
 
