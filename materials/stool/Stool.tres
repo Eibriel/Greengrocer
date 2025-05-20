@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bujgoi4qf434y"]
+
+[ext_resource type="Texture2D" uid="uid://bisx8cmvu2oxt" path="res://textures/stool/stool_default_color.png" id="1_ldbl3"]
+[ext_resource type="Texture2D" uid="uid://b6rvwdl2boveq" path="res://textures/stool/stool_default_metalness.png" id="2_yxjpm"]
+[ext_resource type="Texture2D" uid="uid://b0irt6ytxy0qx" path="res://textures/stool/stool_default_nmap.png" id="3_v3d7j"]
+[ext_resource type="Texture2D" uid="uid://dteivhbx5c2ok" path="res://textures/stool/stool_default_roughness.png" id="4_da4nl"]
+
+[resource]
+resource_name = "Stool"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+albedo_texture = ExtResource("1_ldbl3")
+metallic = 1.0
+metallic_texture = ExtResource("2_yxjpm")
+roughness_texture = ExtResource("4_da4nl")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_v3d7j")

@@ -9,7 +9,7 @@ size = Vector3(1, 0.70961, 0.746735)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6sqt1"]
 size = Vector3(1, 1.57734, 0.935379)
 
-[node name="Diagonal2x1" type="Node3D"]
+[node name="Diagonal2x1_" type="Node3D"]
 script = ExtResource("1_6sqt1")
 
 [node name="Racks" type="Node3D" parent="."]

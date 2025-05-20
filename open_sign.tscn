@@ -1,17 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2ihi6ulqvvh6"]
+[gd_scene load_steps=5 format=3 uid="uid://c2ihi6ulqvvh6"]
 
 [ext_resource type="Script" uid="uid://ddk5s6lq5rdak" path="res://open_sign.gd" id="1_4pqqo"]
+[ext_resource type="ArrayMesh" uid="uid://d2mmbq0g5adi1" path="res://mesh/floor_sign.res" id="2_q77l4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jg7kn"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4pqqo"]
-size = Vector3(0.398682, 0.388916, 0.435547)
+size = Vector3(0.906494, 1.01447, 0.62085)
 
 [node name="OpenSign" type="Node3D"]
 script = ExtResource("1_4pqqo")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+visible = false
 size = Vector3(0.316162, 0.224609, 0.300537)
 material = SubResource("StandardMaterial3D_jg7kn")
 
@@ -20,9 +22,12 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0254896, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609382, 0)
 shape = SubResource("BoxShape3D_4pqqo")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.213405)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.931552, 0.30175)
 text = "Open"
+
+[node name="FloorSign" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_q77l4")

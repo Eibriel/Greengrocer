@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqy5uvoywiubk"]
+
+[ext_resource type="Script" uid="uid://cj4kmbtu078wy" path="res://furniture/pot.gd" id="1_ib3av"]
+[ext_resource type="PackedScene" uid="uid://6icxhmh0fdhi" path="res://furniture/dirt_base.tscn" id="2_ib3av"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvr4h"]
+size = Vector3(1.09473, 0.922947, 1.11135)
+
+[node name="Pot_1x1_" type="Node3D"]
+script = ExtResource("1_ib3av")
+
+[node name="Dirts" type="Node3D" parent="."]
+
+[node name="DirtBase" parent="Dirts" instance=ExtResource("2_ib3av")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.992493, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00175478, 0.450073, 3.00501e-05)
+size = Vector3(1.03845, 0.924072, 1.03809)
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00537074, 0.47136, 0.0108114)
+shape = SubResource("BoxShape3D_rvr4h")

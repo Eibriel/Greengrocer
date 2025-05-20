@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfrbskwgewjlc"]
+
+[ext_resource type="Script" uid="uid://buj530dabwi4b" path="res://furniture/display.gd" id="1_kndg2"]
+[ext_resource type="PackedScene" uid="uid://g4mpiuv1bd8u" path="res://furniture/rack_base.tscn" id="2_siic6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvr4h"]
+size = Vector3(3.60449, 0.922947, 2.33701)
+
+[node name="Cart_3x2_" type="Node3D"]
+script = ExtResource("1_kndg2")
+
+[node name="Racks" type="Node3D" parent="."]
+
+[node name="Rack01" parent="Racks" instance=ExtResource("2_siic6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19003, 1, -0.622004)
+
+[node name="Rack02" parent="Racks" instance=ExtResource("2_siic6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19003, 1, 0.627905)
+
+[node name="Rack03" parent="Racks" instance=ExtResource("2_siic6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0568562, 1, -0.622004)
+
+[node name="Rack04" parent="Racks" instance=ExtResource("2_siic6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0487385, 1, 0.617773)
+
+[node name="Rack05" parent="Racks" instance=ExtResource("2_siic6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31843, 1, -0.622004)
+
+[node name="Rack06" parent="Racks" instance=ExtResource("2_siic6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31031, 1, 0.617773)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0676422, 0.450073, -0.0116887)
+size = Vector3(3.57071, 0.924072, 2.24091)
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059082, 0.47136, -0.0150795)
+shape = SubResource("BoxShape3D_rvr4h")

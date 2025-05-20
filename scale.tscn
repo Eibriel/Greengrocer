@@ -1,19 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://dly7iychbwh5t"]
+[gd_scene load_steps=6 format=3 uid="uid://dly7iychbwh5t"]
 
 [ext_resource type="Script" uid="uid://cecla7rik6qyf" path="res://scale.gd" id="1_tr8fv"]
+[ext_resource type="ArrayMesh" uid="uid://dmyq21lxvcygf" path="res://mesh/stool.res" id="3_6s6ql"]
+[ext_resource type="ArrayMesh" uid="uid://8lux4pvd8ebv" path="res://mesh/scale_ussr/scale_ussr.res" id="4_03o5o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pt18m"]
-albedo_color = Color(0.027451, 1, 0.105882, 1)
+albedo_color = Color(0.34, 0.318013, 0.0102, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tr8fv"]
-size = Vector3(0.570557, 1.13147, 0.644775)
+size = Vector3(1.17798, 2.11209, 0.644775)
 
 [node name="Scale" type="Node3D"]
 script = ExtResource("1_tr8fv")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40271, 0)
-size = Vector3(0.451416, 1.03003, 0.479492)
+size = Vector3(1.1748, 1.03003, 0.479492)
 material = SubResource("StandardMaterial3D_pt18m")
 
 [node name="CursorArea" type="Area3D" parent="."]
@@ -21,9 +23,17 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.396766, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887077, 0)
 shape = SubResource("BoxShape3D_tr8fv")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29323, 0)
 text = "10"
+
+[node name="Stool" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05397)
+mesh = ExtResource("3_6s6ql")
+
+[node name="ScaleUssr" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0176336, 0.922007, 0.00621037)
+mesh = ExtResource("4_03o5o")

@@ -1,4 +1,5 @@
-FurnitureId,AvailableLevel,Price,Descripcion
-DIAGONAL_2x1,2,100,"2 de alto, 1 de ancho, en diagonal"
-VERTICAL_4x3,3,100,"4 de alto, 3 de ancho, vertical"
-CART_3x2,4,100,"con forma de carro, de 3 por 2"
+"FurnitureId","AvailableLevel","Price","Descripcion"
+"DIAGONAL_2x1",2,100,"2 de alto, 1 de ancho, en diagonal"
+"VERTICAL_4x3",3,100,"4 de alto, 3 de ancho, vertical"
+"CART_3x2",4,100,"con forma de carro, de 3 por 2"
+"POT_1x1",0,100,"Maceta comun"

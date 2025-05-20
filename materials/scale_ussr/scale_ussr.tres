@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://wa6txrcgfs0l"]
+
+[ext_resource type="Texture2D" uid="uid://c2acgie7tsw6d" path="res://textures/scale_ussr/initialShadingGroup_albedo.jpeg" id="1_2hq3a"]
+[ext_resource type="Texture2D" uid="uid://bqlqwxrm2n737" path="res://textures/scale_ussr/initialShadingGroup_AO.jpeg" id="2_jkte7"]
+[ext_resource type="Texture2D" uid="uid://dye7jabdbjk7c" path="res://textures/scale_ussr/initialShadingGroup_metallic.jpeg" id="3_2wvit"]
+[ext_resource type="Texture2D" uid="uid://b356mjl1xbo7x" path="res://textures/scale_ussr/initialShadingGroup_normal.jpeg" id="4_d5hsq"]
+[ext_resource type="Texture2D" uid="uid://b72bwjf0v2jho" path="res://textures/scale_ussr/initialShadingGroup_roughness.jpeg" id="5_vne1e"]
+
+[resource]
+resource_name = "scale_ussr"
+albedo_color = Color(0.735357, 0.735357, 0.735357, 0)
+albedo_texture = ExtResource("1_2hq3a")
+metallic = 1.0
+metallic_texture = ExtResource("3_2wvit")
+roughness_texture = ExtResource("5_vne1e")
+normal_enabled = true
+normal_texture = ExtResource("4_d5hsq")
+ao_enabled = true
+ao_texture = ExtResource("2_jkte7")

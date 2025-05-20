@@ -144,6 +144,10 @@ func _process(delta: float) -> void:
 					#box.remove(buy_amount)
 					#game_state.money += buy_amount * game_state.get_price(box.type)
 
+	#$SunRotation.rotate_z(0.1*delta)
+	$WorldEnvironment.environment.sky.sky_material.energy_multiplier = \
+		clamp(remap(game_state.time, 0.0, 60.0*14, 0.3, 0.0), 0.0, 0.3)
+
 func end_day() -> void:
 	if game_state.time == DAY_TIME:
 		running_time = false
@@ -228,6 +232,28 @@ func fire_ray(button_index: int) -> void:
 			grabbed_item = coll
 			current_task = TASKS.GRABBING_WOODBOX
 			grabbing_item = true
+		elif coll is Pot:
+			grabbed_item = coll
+			current_task = TASKS.GRABBING_WOODBOX
+			grabbing_item = true
+		elif coll is Dirt:
+			if current_task == TASKS.GRABBING_WOODBOX and \
+					grabbed_item is Woodbox:
+				if grabbed_item.type != "":
+					if grabbed_item.amount > 0 and coll.amount == 0:
+						if coll.type == "":
+							coll.type = grabbed_item.type
+						if coll.type == grabbed_item.type:
+							coll.amount += 1
+							grabbed_item.amount -= 1
+					elif coll.type == grabbed_item.type and coll.amount > 0:
+						coll.amount -= 1
+						grabbed_item.amount += 1
+				else:
+					if coll.amount > 0:
+						grabbed_item.type = coll.type
+						coll.amount -= 1
+						grabbed_item.amount += 1
 
 func move_item(from: Woodbox, to: Woodbox) -> void:
 	var from_type := from.type
@@ -257,7 +283,20 @@ func _on_order_list_item_enabled(item: ItemRes) -> void:
 	pass # Replace with function body.
 
 
-func _on_order_list_furniture_purchased(furniture: ) -> void:
-	var new_furniture := preload("res://furniture/diagonal_2x1.tscn").instantiate()
+func _on_order_list_furniture_purchased(furniture: FurnitureRes) -> void:
+	var new_furniture: Node3D
+	match furniture.item_id:
+		"DIAGONAL_2x1":
+			new_furniture = preload("res://furniture/diagonal_2x1.tscn").instantiate()
+		"VERTICAL_4x3":
+			new_furniture = preload("res://furniture/vertical_4x3.tscn").instantiate()
+		"CART_3x2":
+			new_furniture = preload("res://furniture/cart_3x2.tscn").instantiate()
+		# POTS
+		"POT_1x1":
+			new_furniture = preload("res://furniture/pot_1x1.tscn").instantiate()
 	new_furniture.position = Vector3(randf(), 0, 12+randf())
-	Global.racks.add_child(new_furniture)
+	if new_furniture is Display:
+		Global.racks.add_child(new_furniture)
+	else:
+		add_child(new_furniture)

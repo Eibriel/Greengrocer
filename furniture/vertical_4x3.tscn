@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://x3bd3m221c2b"]
+
+[ext_resource type="Script" uid="uid://buj530dabwi4b" path="res://furniture/display.gd" id="1_cmxl0"]
+[ext_resource type="PackedScene" uid="uid://g4mpiuv1bd8u" path="res://furniture/rack_base.tscn" id="2_18bdt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvr4h"]
+size = Vector3(1, 0.374214, 0.746735)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cmxl0"]
+size = Vector3(1, 2.78659, 0.234535)
+
+[node name="Vertical_4x3_" type="Node3D"]
+script = ExtResource("1_cmxl0")
+
+[node name="Racks" type="Node3D" parent="."]
+
+[node name="Rack01" parent="Racks" instance=ExtResource("2_18bdt")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.621782, -0.179)
+
+[node name="Rack02" parent="Racks" instance=ExtResource("2_18bdt")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 1.25131, -0.13556)
+
+[node name="Rack03" parent="Racks" instance=ExtResource("2_18bdt")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 1.90736, -0.179)
+
+[node name="Rack04" parent="Racks" instance=ExtResource("2_18bdt")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 2.55426, -0.13556)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177368, -0.143311)
+size = Vector3(1, 0.378661, 0.713379)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39227, -0.814392)
+size = Vector3(1, 2.80847, 0.286743)
+
+[node name="CursorArea" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.196994, -0.138443)
+shape = SubResource("BoxShape3D_rvr4h")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CursorArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40318, -0.840511)
+shape = SubResource("BoxShape3D_cmxl0")

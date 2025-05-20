@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bq0kjrjm0uf5v"]
+
+[ext_resource type="Texture2D" uid="uid://c71p1dva358ue" path="res://textures/fruit/28_potato_albedo.jpeg" id="1_4v2ja"]
+[ext_resource type="Texture2D" uid="uid://c3e5dk8y41f8x" path="res://textures/fruit/28_potato_normals.jpeg" id="2_8y2xc"]
+
+[resource]
+resource_name = "28_potato"
+albedo_texture = ExtResource("1_4v2ja")
+metallic_specular = 0.25
+roughness = 0.71
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = ExtResource("2_8y2xc")

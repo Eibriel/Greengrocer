@@ -69,7 +69,8 @@ func _process(delta: float) -> void:
 				if idle_time > 30.0:
 					current_state = STATE.WALKING_OUT
 		STATE.WALKING_IN:
-			if position.distance_to(Vector3.ZERO) < 0.5:
+			var shop_center := Vector3(0,0,4)
+			if position.distance_to(shop_center) < 0.5:
 				var found := false
 				#print(get_rack_list().size())
 				#for r:Rack in get_rack_list():
@@ -94,11 +95,11 @@ func _process(delta: float) -> void:
 							$Label3D2.text = "ERROR 1"
 							current_state = STATE.WALKING_OUT
 			else:
-				move_towards(Vector3.ZERO, delta)
+				move_towards(shop_center, delta)
 		STATE.WALKING_TO_WOODBOX:
 			if not selected_woodbox or selected_woodbox.is_queued_for_deletion():
 				current_state = STATE.WALKING_IN
-			elif position.distance_to(selected_woodbox.position) < 0.5:
+			elif position.distance_to(selected_woodbox.position) < 0.1:
 				var sw_type = selected_woodbox.type
 				if selected_woodbox.amount > 0:
 					if not is_price_ok(selected_woodbox):
@@ -132,12 +133,12 @@ func _process(delta: float) -> void:
 			else:
 				current_state = STATE.WALKING_IN
 		STATE.WALKING_TO_SCALE:
-			if position.distance_to(Global.scale.position) < 0.5:
+			if position.distance_to(Global.scale.position) < 0.2:
 				Global.scale.register_to_queue(self)
 			else:
 				move_towards(Global.scale.position, delta)
 		STATE.WALKING_OUT:
-			var out_pos := Vector3(0, 0, 14)
+			var out_pos := Vector3(5, 0, 14)
 			if position.distance_to(out_pos) < 0.5:
 				queue_free()
 			else:

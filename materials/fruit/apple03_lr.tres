@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://btpxc2rx3qdkp"]
+
+[ext_resource type="Texture2D" uid="uid://ddwbnse1mm1fl" path="res://textures/fruit/apple03_lr_albedo.jpeg" id="1_74be3"]
+[ext_resource type="Texture2D" uid="uid://bmsyfdg8ddtp1" path="res://textures/fruit/apple03_lr_normals.jpeg" id="2_st44v"]
+
+[resource]
+resource_name = "apple03_lr"
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+albedo_texture = ExtResource("1_74be3")
+metallic_specular = 0.41
+roughness = 0.37
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = ExtResource("2_st44v")
+clearcoat_enabled = true
+subsurf_scatter_enabled = true

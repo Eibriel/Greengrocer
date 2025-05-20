@@ -1,22 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqegxdu4a17pb"]
+[gd_scene load_steps=16 format=3 uid="uid://cqegxdu4a17pb"]
 
 [ext_resource type="Script" uid="uid://svlujvqug5wa" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://coeaj8kxwl40n" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://c2l2he6l5dvio" path="res://icon.svg" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cvp3vx43a03g5" path="res://trash_can.tscn" id="5_272bh"]
-[ext_resource type="PackedScene" uid="uid://dg25nnw6pwfgg" path="res://delivery_board.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://c4i3ijcoiee41" path="res://order_list.tscn" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://ciw07lrllou2u" path="res://pause_menu.tscn" id="8_efxa6"]
 [ext_resource type="PackedScene" uid="uid://c2ihi6ulqvvh6" path="res://open_sign.tscn" id="9_4c57u"]
 [ext_resource type="PackedScene" uid="uid://dly7iychbwh5t" path="res://scale.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://8w8u2kthpwyh" path="res://furniture/diagonal_2x1.tscn" id="10_4c57u"]
+[ext_resource type="ArrayMesh" uid="uid://dvlv04dg7e8yj" path="res://mesh/wall_lowpoly/wall_lowpoly.res" id="11_dg77c"]
+[ext_resource type="ArrayMesh" uid="uid://cmokt5j4w6oxg" path="res://mesh/fence_long.res" id="11_efxa6"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
+energy_multiplier = 0.3
 
 [sub_resource type="Sky" id="Sky_h2yge"]
-sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+sky_material = SubResource("ProceduralSkyMaterial_kek77")
 
 [sub_resource type="Environment" id="Environment_1bvp3"]
 background_mode = 2
@@ -24,7 +24,17 @@ sky = SubResource("Sky_h2yge")
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 1
+sdfgi_min_cell_size = 0.390625
+sdfgi_y_scale = 0
 glow_enabled = true
+fog_density = 0.001
+fog_height = 1.0
+fog_height_density = 0.02
+volumetric_fog_enabled = true
+volumetric_fog_gi_inject = 5.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
 albedo_color = Color(0.42, 0.24626, 0.1134, 1)
@@ -38,27 +48,50 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.8998)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, 3.44549, 5.61594)
+light_color = Color(0.529412, 1, 0.447059, 1)
+light_energy = 6.0
 shadow_enabled = true
+spot_angle = 54.6773
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37337, 2.59631, 5.55386)
+light_energy = 0.5
+omni_range = 4.734
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.963607, -7.96682e-09, 0.267322, -0.267322, -2.87177e-08, 0.963607, 0, -1, -2.98023e-08, 1.2638, 5.74428, 11.7348)
+light_color = Color(1, 0.427451, 0.403922, 1)
+light_energy = 6.0
+shadow_enabled = true
+spot_range = 10.0005
+spot_angle = 34.5352
+
+[node name="Fence" type="Node3D" parent="."]
+
+[node name="FenceLong" type="MeshInstance3D" parent="Fence"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.009, 36.1928)
+mesh = ExtResource("11_efxa6")
+skeleton = NodePath("../..")
+
+[node name="FenceLong3" type="MeshInstance3D" parent="Fence"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.9036, -0.009, 36.1928)
+mesh = ExtResource("11_efxa6")
+skeleton = NodePath("../..")
+
+[node name="FenceLong2" type="MeshInstance3D" parent="Fence"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8062, -0.009, 36.1928)
+mesh = ExtResource("11_efxa6")
+skeleton = NodePath("../..")
 
 [node name="FloorWalls" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="FloorWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509601, -36.4698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.509601, -34.2188)
 use_collision = true
-size = Vector3(132.767, 1, 144.208)
+size = Vector3(132.767, 1, 148.71)
 material = SubResource("StandardMaterial3D_0xm2m")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="FloorWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.1636, 2.37773, -36.4698)
-use_collision = true
-size = Vector3(2.43945, 4.7218, 144.208)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="FloorWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.2493, 2.37773, -36.4698)
-use_collision = true
-size = Vector3(2.43945, 4.7218, 144.208)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="FloorWalls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 2.37773, -108.652)
@@ -66,20 +99,21 @@ use_collision = true
 size = Vector3(129.099, 4.7218, 2.62134)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="FloorWalls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 2.37773, 34.505)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, -0.0658436, 28.1595)
+visible = false
 use_collision = true
-size = Vector3(129.099, 4.7218, 2.62134)
+size = Vector3(129.099, 9.60895, 2.62134)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 1.49181, 9.84588)
 use_collision = true
-size = Vector3(129.099, 3, 0.3)
+size = Vector3(129.099, 5.33691, 0.3)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="CSGBox3D6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2742, 0.596605)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38005, 0.596605)
 operation = 2
 use_collision = true
-size = Vector3(2.69556, 2.4516, 4.52405)
+size = Vector3(5.88672, 2.6633, 4.52405)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276901, 1.49181, -10.9973)
@@ -105,36 +139,58 @@ radius = 3.93852
 
 [node name="Level01" type="Node3D" parent="."]
 
+[node name="WallLowpoly" type="MeshInstance3D" parent="Level01"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.1387, -0.126766, 12.9808)
+mesh = ExtResource("11_dg77c")
+skeleton = NodePath("../..")
+
+[node name="WallLowpoly2" type="MeshInstance3D" parent="Level01"]
+transform = Transform3D(-5.98846e-08, 0, 1.37, 0, 1.37, 0, -1.37, 0, -5.98846e-08, -3.18376, -0.126766, 4.17014)
+mesh = ExtResource("11_dg77c")
+skeleton = NodePath("../..")
+
+[node name="WallLowpoly3" type="MeshInstance3D" parent="Level01"]
+transform = Transform3D(1.79654e-07, 0, -1.37, 0, 1.37, 0, 1.37, 0, 1.79654e-07, 3.72214, -0.0079962, 4.17014)
+mesh = ExtResource("11_dg77c")
+skeleton = NodePath("../..")
+
+[node name="WallLowpoly4" type="MeshInstance3D" parent="Level01"]
+transform = Transform3D(1.37, 0, 1.49012e-07, 0, 1.37, 0, -1.49012e-07, 0, 1.37, 0.225702, -0.0079962, 0.583001)
+mesh = ExtResource("11_dg77c")
+skeleton = NodePath("../..")
+
 [node name="CSGBox3D6" type="CSGBox3D" parent="Level01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.378, -0.522)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.37125, 2.10362, -0.522)
 use_collision = true
-size = Vector3(0.618164, 4.7218, 20.8896)
+size = Vector3(0.618164, 5.27057, 20.8896)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Level01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2.378, -0.522)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.87593, 2.1544, -0.522)
 use_collision = true
-size = Vector3(0.618164, 4.7218, 20.8896)
+size = Vector3(0.618164, 5.16901, 20.8896)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Level01"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287938, 2.378, -4.15516)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287938, 2.378, 0.552371)
 use_collision = true
 size = Vector3(18.3389, 4.7218, 0.408203)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Level01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287938, 4.34604, 4.92624)
+use_collision = true
+size = Vector3(8.33105, 0.484588, 9.89508)
 
 [node name="Racks" type="Node3D" parent="."]
 
 [node name="Diagonal2x1_1" parent="Racks" instance=ExtResource("10_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.842, 0, 0.316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69252, 0, 3.05308)
 
 [node name="Diagonal2x1_2" parent="Racks" instance=ExtResource("10_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49227, 0, 0.316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49227, 0, 3.33006)
 
 [node name="NPCs" type="Node3D" parent="."]
 
-[node name="DeliveryBoard" parent="." instance=ExtResource("6_7mycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.70402, 0.866464, 9.54561)
-
 [node name="TrashCan" parent="." instance=ExtResource("5_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23338, 0.102706, 8.10938)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6569, 0.102706, 11.0983)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -178,10 +234,10 @@ unique_name_in_owner = true
 layout_mode = 1
 
 [node name="Scale" parent="." instance=ExtResource("9_kek77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48224, 0.102704, 6.35518)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.036, 0, 6.355)
 
 [node name="OpenSign" parent="." instance=ExtResource("9_4c57u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53129, 1.50939, 10.1461)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0206363, -0.00607502, 12.4438)
 
 [connection signal="buy_completed" from="Control/OrderList" to="." method="_on_order_list_buy_completed"]
 [connection signal="furniture_purchased" from="Control/OrderList" to="." method="_on_order_list_furniture_purchased"]

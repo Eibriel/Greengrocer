@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://ihc1rj6cgj2h"]
+
+[ext_resource type="Texture2D" uid="uid://2and8n7pkh4s" path="res://textures/scale_ussr/lambert2SG_albedo.png" id="1_im5b5"]
+[ext_resource type="Texture2D" uid="uid://bx3mnr8x5oycb" path="res://textures/scale_ussr/lambert2SG_AO.jpeg" id="2_yng6q"]
+[ext_resource type="Texture2D" uid="uid://domejq6r1vesy" path="res://textures/scale_ussr/lambert2SG_metallic.jpeg" id="3_lycdg"]
+[ext_resource type="Texture2D" uid="uid://by7awkl72c5gv" path="res://textures/scale_ussr/lambert2SG_normal.jpeg" id="4_n05ty"]
+
+[resource]
+resource_name = "scale_ussr_glass"
+transparency = 1
+albedo_texture = ExtResource("1_im5b5")
+metallic = 1.0
+metallic_texture = ExtResource("3_lycdg")
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("4_n05ty")
+ao_enabled = true
+ao_texture = ExtResource("2_yng6q")

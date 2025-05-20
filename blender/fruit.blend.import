@@ -1,0 +1,474 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cnoovybhouce3"
+path="res://.godot/imported/fruit.blend-f933dbd42769fd7c97846610f6919753.scn"
+
+[deps]
+
+source_file="res://blender/fruit.blend"
+dest_files=["res://.godot/imported/fruit.blend-f933dbd42769fd7c97846610f6919753.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"01_mango": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/01_mango.tres"
+},
+"02_potato": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/02_potato.tres"
+},
+"03_avocado": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/03_avocado.tres"
+},
+"04_lemon": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/04_lemon.tres"
+},
+"05_turnip": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/05_turnip.tres"
+},
+"06_custard_apple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/06_custard_apple.tres"
+},
+"07_carrot": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/07_carrot.tres"
+},
+"08_orange": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/08_orange.tres"
+},
+"09_pepper": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/09_pepper.tres"
+},
+"10_zucchini": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/10_zucchini.tres"
+},
+"11_lemon": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/11_lemon.tres"
+},
+"12_potato": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/12_potato.tres"
+},
+"13_fennel": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/13_fennel.tres"
+},
+"14_gourd": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/14_gourd.tres"
+},
+"15_artichoke": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/15_artichoke.tres"
+},
+"17_heirloom_tomato": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/17_heirloom_tomato.tres"
+},
+"18_kiwi": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/18_kiwi.tres"
+},
+"19_onion": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/19_onion.tres"
+},
+"20_orange": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/20_orange.tres"
+},
+"21_napa_cabbage": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/21_napa_cabbage.tres"
+},
+"22_beetroot": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/22_beetroot.tres"
+},
+"23_pomegranate": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/23_pomegranate.tres"
+},
+"24_pomegranate": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/24_pomegranate.tres"
+},
+"25_grapes": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/25_grapes.tres"
+},
+"26_mango": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/26_mango.tres"
+},
+"27_lemon": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/27_lemon.tres"
+},
+"28_potato": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/28_potato.tres"
+},
+"29_celery": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/29_celery.tres"
+},
+"30_sweet_dumpling": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/30_sweet_dumpling.tres"
+},
+"31_pepper": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/31_pepper.tres"
+},
+"32_pineapple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/32_pineapple.tres"
+},
+"33_mandarin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/33_mandarin.tres"
+},
+"34_yellow_sugar_melon": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/34_yellow_sugar_melon.tres"
+},
+"35_garlic": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/35_garlic.tres"
+},
+"36_pineapple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/36_pineapple.tres"
+},
+"37_garlic": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/37_garlic.tres"
+},
+"38_garlic": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/38_garlic.tres"
+},
+"39_grapefruit": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/39_grapefruit.tres"
+},
+"40_kiwano": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/40_kiwano.tres"
+},
+"41_papaya": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/41_papaya.tres"
+},
+"42_potato": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/42_potato.tres"
+},
+"43_kiwi": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/43_kiwi.tres"
+},
+"44_mango": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/44_mango.tres"
+},
+"45_radish": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/45_radish.tres"
+},
+"46_melon": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/46_melon.tres"
+},
+"47_kiwano": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/47_kiwano.tres"
+},
+"48_parsnip": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/48_parsnip.tres"
+},
+"49_broccoli": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/49_broccoli.tres"
+},
+"50_cabbage": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/50_cabbage.tres"
+},
+"51_pomegranate": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/51_pomegranate.tres"
+},
+"52_pumpkin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/52_pumpkin.tres"
+},
+"53_potato": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/53_potato.tres"
+},
+"54_kiwano": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/54_kiwano.tres"
+},
+"56_pineapple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/56_pineapple.tres"
+},
+"58_orange": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/58_orange.tres"
+},
+"59_hokaido_pumpkin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/59_hokaido_pumpkin.tres"
+},
+"60_pumpkin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/60_pumpkin.tres"
+},
+"61_kohlrabi": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/61_kohlrabi.tres"
+},
+"63_pineapple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/63_pineapple.tres"
+},
+"64_pineapple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/64_pineapple.tres"
+},
+"65_pumpkin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/65_pumpkin.tres"
+},
+"66_pumpkin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/66_pumpkin.tres"
+},
+"67_pomegranate": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/67_pomegranate.tres"
+},
+"68_hokaido_pumpkin": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/68_hokaido_pumpkin.tres"
+},
+"69_broccoli": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/69_broccoli.tres"
+},
+"70_kiwano": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/70_kiwano.tres"
+},
+"71_peach": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/71_peach.tres"
+},
+"72_orange": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/72_orange.tres"
+},
+"73_strawberry": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/73_strawberry.tres"
+},
+"74_mandarine": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/74_mandarine.tres"
+},
+"75_radicchio": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/75_radicchio.tres"
+},
+"76_fig": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/76_fig.tres"
+},
+"77_turnip": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/77_turnip.tres"
+},
+"78_calabaza": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/78_calabaza.tres"
+},
+"79_pepper": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/79_pepper.tres"
+},
+"80_pineapple": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/80_pineapple.tres"
+},
+"apple01_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple01_lr.tres"
+},
+"apple02_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple02_lr.tres"
+},
+"apple03_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple03_lr.tres"
+},
+"apple04_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple04_lr.tres"
+},
+"apple05_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple05_lr.tres"
+},
+"apple06_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple06_lr.tres"
+},
+"apple08_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple08_lr.tres"
+},
+"apple09_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple09_lr.tres"
+},
+"apple10_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple10_lr.tres"
+},
+"apple11_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/apple11_lr.tres"
+},
+"banana01_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana01_lr.tres"
+},
+"banana02_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana02_lr.tres"
+},
+"banana03_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana03_lr.tres"
+},
+"banana04_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana04_lr.tres"
+},
+"banana05_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana05_lr.tres"
+},
+"banana06_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana06_lr.tres"
+},
+"banana07_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana07_lr.tres"
+},
+"banana09_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana09_lr.tres"
+},
+"banana10_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana10_lr.tres"
+},
+"banana12_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/banana12_lr.tres"
+},
+"pear01_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/pear01_lr.tres"
+},
+"pear02_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/pear02_lr.tres"
+},
+"pear03_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/pear03_lr.tres"
+},
+"pear04_lr": {
+"use_external/enabled": true,
+"use_external/path": "res://materials/fruit/pear04_lr.tres"
+}
+},
+"meshes": {
+"fruit_tmp_o_033": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://mesh/fruit/potato.res"
+},
+"fruit_tmp_o_104": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://mesh/fruit/apple03.res"
+}
+}
+}
+blender/nodes/visible=0
+blender/nodes/active_collection_only=false
+blender/nodes/punctual_lights=true
+blender/nodes/cameras=true
+blender/nodes/custom_properties=true
+blender/nodes/modifiers=1
+blender/meshes/colors=false
+blender/meshes/uvs=true
+blender/meshes/normals=true
+blender/meshes/export_geometry_nodes_instances=false
+blender/meshes/tangents=true
+blender/meshes/skins=2
+blender/meshes/export_bones_deforming_mesh_only=false
+blender/materials/unpack_enabled=true
+blender/materials/export_materials=1
+blender/animation/limit_playback=true
+blender/animation/always_sample=true
+blender/animation/group_tracks=true
