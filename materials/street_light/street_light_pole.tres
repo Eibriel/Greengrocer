@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bwrdksw56k3ke"]
+
+[ext_resource type="Texture2D" uid="uid://jt6gi6uqetyd" path="res://textures/street_light/StreetLightPole_BaseColor.png" id="1_ioj7w"]
+[ext_resource type="Texture2D" uid="uid://drbxv73867w4a" path="res://textures/street_light/StreetLightPole_Metallic.png" id="2_wv46b"]
+[ext_resource type="Texture2D" uid="uid://db4j0dc4cmyrb" path="res://textures/street_light/StreetLightPole_Normal.png" id="3_txeh2"]
+[ext_resource type="Texture2D" uid="uid://b7diibv5xcnng" path="res://textures/street_light/StreetLightPole_Roughness.png" id="4_1geca"]
+
+[resource]
+resource_name = "street_light_pole"
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+albedo_texture = ExtResource("1_ioj7w")
+metallic = 1.0
+metallic_texture = ExtResource("2_wv46b")
+roughness_texture = ExtResource("4_1geca")
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("3_txeh2")

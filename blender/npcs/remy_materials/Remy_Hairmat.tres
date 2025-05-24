@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bi1t8h1em0gxl"]
+
+[ext_resource type="Texture2D" uid="uid://dlvr5cooljv5v" path="res://blender/npcs/remy_textures/Remy_Hair_Opacity.png" id="1_e6cwu"]
+[ext_resource type="Texture2D" uid="uid://b2rl1yxnl4s0r" path="res://blender/npcs/remy_textures/Remy_Hair_Gloss.png" id="2_pxmrl"]
+[ext_resource type="Texture2D" uid="uid://cy7hpghrbd1vf" path="res://blender/npcs/remy_textures/Remy_Hair_Normal.png" id="3_23p2p"]
+
+[resource]
+resource_name = "Remy_Hairmat"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_e6cwu")
+metallic = 0.04
+metallic_texture = ExtResource("2_pxmrl")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_pxmrl")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_23p2p")

@@ -10,6 +10,7 @@ var current_state := STATE.IDLE
 
 var idle_time := 0.0
 var searching_time := 0.0
+var picking_time := 0.0
 
 const SPEED := 2.0
 
@@ -21,6 +22,9 @@ enum STATE {
 	WALKING_TO_SCALE,
 	WALKING_OUT
 }
+
+var npc_anim:AnimationPlayer
+var astar_box_grid:Dictionary[Vector2i,MeshInstance3D]
 
 func _ready() -> void:
 	#item_options.erase(Woodbox.ITEM_TYPE.EMPTY)
@@ -54,6 +58,14 @@ func _ready() -> void:
 	#for sh in shopping_list:
 	#	items_grabbed[sh] = 0
 	$Label3D2.text = ""
+	
+	npc_anim = $remy/AnimationPlayer
+	
+	npc_anim.get_animation("Walking").loop_mode = Animation.LoopMode.LOOP_LINEAR
+	npc_anim.get_animation("Idle").loop_mode = Animation.LoopMode.LOOP_LINEAR
+	npc_anim.play("Idle")
+	
+	build_astar_grid()
 
 func _process(delta: float) -> void:
 	delta *= Global.time_mult
@@ -69,8 +81,9 @@ func _process(delta: float) -> void:
 				if idle_time > 30.0:
 					current_state = STATE.WALKING_OUT
 		STATE.WALKING_IN:
-			var shop_center := Vector3(0,0,4)
+			var shop_center := Vector3(0,0,-1)
 			if position.distance_to(shop_center) < 0.5:
+				switch_animation("Idle")
 				var found := false
 				#print(get_rack_list().size())
 				#for r:Rack in get_rack_list():
@@ -95,11 +108,15 @@ func _process(delta: float) -> void:
 							$Label3D2.text = "ERROR 1"
 							current_state = STATE.WALKING_OUT
 			else:
+				switch_animation("Walking")
 				move_towards(shop_center, delta)
 		STATE.WALKING_TO_WOODBOX:
+			var woodbox_pos := selected_woodbox.global_position
+			woodbox_pos.y = 0
 			if not selected_woodbox or selected_woodbox.is_queued_for_deletion():
 				current_state = STATE.WALKING_IN
-			elif position.distance_to(selected_woodbox.position) < 0.1:
+			elif position.distance_to(woodbox_pos) < 0.1:
+				switch_animation("Idle")
 				var sw_type = selected_woodbox.type
 				if selected_woodbox.amount > 0:
 					if not is_price_ok(selected_woodbox):
@@ -114,34 +131,43 @@ func _process(delta: float) -> void:
 					shopping_list.erase(sw_type)
 					check_shopping_list()
 			else:
-				move_towards(selected_woodbox.position, delta)
+				switch_animation("Walking")
+				move_towards(woodbox_pos, delta)
 		STATE.GRABBING_ITEMS:
+			switch_animation("Pick")
 			if not selected_woodbox or selected_woodbox.is_queued_for_deletion():
 				current_state = STATE.WALKING_IN
 			elif not shopping_list.has(selected_woodbox.type):
 				current_state = STATE.WALKING_IN
 			elif selected_woodbox.amount > 0:
-				current_state = STATE.GRABBING_ITEMS
-				var sw_type = selected_woodbox.type
-				items_grabbed.get_or_add(sw_type, 0)
-				items_grabbed[sw_type] += 1
-				selected_woodbox.remove(1)
-				if items_grabbed[sw_type] >= shopping_list[sw_type]:
-					$Label3D2.text = "ERROR 3"
-					shopping_list.erase(sw_type)
-					check_shopping_list()
+				if picking_time > 0.0:
+					picking_time -= delta
+				else:
+					picking_time = 1.0
+					#current_state = STATE.GRABBING_ITEMS
+					var sw_type = selected_woodbox.type
+					items_grabbed.get_or_add(sw_type, 0)
+					items_grabbed[sw_type] += 1
+					selected_woodbox.remove(1)
+					if items_grabbed[sw_type] >= shopping_list[sw_type]:
+						$Label3D2.text = "ERROR 3"
+						shopping_list.erase(sw_type)
+						check_shopping_list()
 			else:
 				current_state = STATE.WALKING_IN
 		STATE.WALKING_TO_SCALE:
 			if position.distance_to(Global.scale.position) < 0.2:
 				Global.scale.register_to_queue(self)
+				switch_animation("Idle")
 			else:
+				switch_animation("Walking")
 				move_towards(Global.scale.position, delta)
 		STATE.WALKING_OUT:
 			var out_pos := Vector3(5, 0, 14)
 			if position.distance_to(out_pos) < 0.5:
 				queue_free()
 			else:
+				switch_animation("Walking")
 				move_towards(out_pos, delta)
 	
 	$Label3D.text = ""
@@ -150,6 +176,12 @@ func _process(delta: float) -> void:
 	#$Label3D.text += "\n---"
 	for ig in items_grabbed:
 		$Label3D.text += "\n%s: %d" % [ig, items_grabbed[ig]]
+
+func switch_animation(animation_id: String) -> void:
+	if npc_anim.current_animation != animation_id:
+		npc_anim.play(animation_id)
+		if animation_id == "Walking":
+			npc_anim.speed_scale = 1.2
 
 func get_rack_list() -> Array[Rack]:
 	var racks: Array[Rack] = []
@@ -202,5 +234,32 @@ func is_price_ok(woodbox: Woodbox) -> bool:
 		return false
 
 func move_towards(target_pos: Vector3, delta:float) -> void:
+	pathfinding(target_pos)
+	
 	var direction := position.direction_to(target_pos)
-	translate(direction*SPEED*delta)
+	#translate(direction*SPEED*delta)
+	position += direction*SPEED*delta
+	look_at(target_pos, Vector3.UP, true)
+
+func pathfinding(target_pos:Vector3) -> void:
+	var from_pos := Vector2(global_position.x, global_position.z)
+	var to_pos := Vector2(target_pos.x, target_pos.z)
+	var path := Global.astar_get_path(from_pos, to_pos)
+	for p in astar_box_grid:
+		astar_box_grid[p].scale.y = 1.0
+	for p in path:
+		astar_box_grid[Vector2i(p)].scale.y = 4.0
+
+func build_astar_grid() -> void:
+	var region := Global.astar_grid.region
+	var cell_size := Global.astar_grid.cell_size
+	for x in region.size.x:
+		for y in region.size.y:
+			var box := MeshInstance3D.new()
+			var box_mesh := BoxMesh.new()
+			box_mesh.size = Vector3(0.25, 0.1, 0.25)
+			box.mesh = box_mesh
+			box.position.x = (x+region.position.x) * cell_size.x
+			box.position.z = (y+region.position.y) * cell_size.y
+			$AStarGrid.add_child(box)
+			astar_box_grid[Vector2i(x,y)+region.position] = box

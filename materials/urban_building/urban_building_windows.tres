@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7iq3av0t1hmx"]
+
+[ext_resource type="Texture2D" uid="uid://bf5wv3hlpj0ei" path="res://textures/urban_building/urban_building_windows.png" id="1_q6viy"]
+
+[resource]
+resource_name = "urban_building_windows"
+albedo_texture = ExtResource("1_q6viy")
+roughness = 0.6

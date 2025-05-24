@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2ihi6ulqvvh6"]
+[gd_scene load_steps=6 format=3 uid="uid://c2ihi6ulqvvh6"]
 
 [ext_resource type="Script" uid="uid://ddk5s6lq5rdak" path="res://open_sign.gd" id="1_4pqqo"]
 [ext_resource type="ArrayMesh" uid="uid://d2mmbq0g5adi1" path="res://mesh/floor_sign.res" id="2_q77l4"]
@@ -8,6 +8,9 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4pqqo"]
 size = Vector3(0.906494, 1.01447, 0.62085)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q77l4"]
+size = Vector3(0.751343, 1.18402, 0.554993)
 
 [node name="OpenSign" type="Node3D"]
 script = ExtResource("1_4pqqo")
@@ -31,3 +34,9 @@ text = "Open"
 
 [node name="FloorSign" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_q77l4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00177002, 0.55722, 0.00582886)
+shape = SubResource("BoxShape3D_q77l4")

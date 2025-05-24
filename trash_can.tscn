@@ -1,18 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvp3vx43a03g5"]
+[gd_scene load_steps=6 format=3 uid="uid://cvp3vx43a03g5"]
 
 [ext_resource type="Script" uid="uid://bfr4mmsn6c2we" path="res://trash_can.gd" id="1_bgvmr"]
+[ext_resource type="ArrayMesh" uid="uid://c88femss58y1x" path="res://mesh/trash_can/trash_can.res" id="2_alpy1"]
+[ext_resource type="ArrayMesh" uid="uid://bitih1fvnxxvy" path="res://mesh/trash_can/trash_can_cap.res" id="3_wr0p8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgvmr"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_alpy1"]
-size = Vector3(0.570557, 1.13147, 0.644775)
+[sub_resource type="BoxShape3D" id="BoxShape3D_wr0p8"]
+size = Vector3(1.46851, 1.31624, 1.14935)
 
 [node name="TrashCan" type="Node3D"]
 script = ExtResource("1_bgvmr")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40271, 0)
+visible = false
 size = Vector3(0.451416, 1.03003, 0.479492)
 material = SubResource("StandardMaterial3D_bgvmr")
 
@@ -21,5 +24,13 @@ collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.396766, 0)
-shape = SubResource("BoxShape3D_alpy1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693725, -0.00631714)
+shape = SubResource("BoxShape3D_wr0p8")
+
+[node name="TrashCan" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_alpy1")
+
+[node name="TrashCanCap" type="MeshInstance3D" parent="TrashCan"]
+transform = Transform3D(-1, -1.11005e-16, 8.74228e-08, 8.70187e-08, 0.0960368, 0.995378, -8.39581e-09, 0.995378, -0.0960368, 0.0353052, 1.21949, -0.57753)
+mesh = ExtResource("3_wr0p8")
+skeleton = NodePath("../..")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8w8u2kthpwyh"]
+[gd_scene load_steps=6 format=3 uid="uid://8w8u2kthpwyh"]
 
 [ext_resource type="Script" uid="uid://buj530dabwi4b" path="res://furniture/display.gd" id="1_6sqt1"]
 [ext_resource type="PackedScene" uid="uid://g4mpiuv1bd8u" path="res://furniture/rack_base.tscn" id="1_rvr4h"]
@@ -8,6 +8,9 @@ size = Vector3(1, 0.70961, 0.746735)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6sqt1"]
 size = Vector3(1, 1.57734, 0.935379)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gcd3"]
+size = Vector3(1, 1.92767, 1.79486)
 
 [node name="Diagonal2x1_" type="Node3D"]
 script = ExtResource("1_6sqt1")
@@ -39,3 +42,9 @@ shape = SubResource("BoxShape3D_rvr4h")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="CursorArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.798557, -1.16048)
 shape = SubResource("BoxShape3D_6sqt1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.935455, -0.667084)
+shape = SubResource("BoxShape3D_3gcd3")

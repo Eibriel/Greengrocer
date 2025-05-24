@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxic37dug7o1e"]
+[gd_scene load_steps=4 format=3 uid="uid://cxic37dug7o1e"]
 
 [ext_resource type="Script" uid="uid://dyjurohr5r4ge" path="res://npc.gd" id="1_ideak"]
+[ext_resource type="PackedScene" uid="uid://bwoo8dv2r3pfs" path="res://blender/npcs/remy.blend" id="2_xxcha"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ideak"]
 albedo_color = Color(0.996078, 1, 0.105882, 1)
@@ -10,15 +11,22 @@ script = ExtResource("1_ideak")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40271, 0)
+visible = false
 size = Vector3(0.451416, 1.03003, 0.479492)
 material = SubResource("StandardMaterial3D_ideak")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12962, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.12799, 0)
 text = "Data"
 vertical_alignment = 2
 
 [node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87437, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33243, 0)
 text = "Data"
 vertical_alignment = 2
+
+[node name="remy" parent="." instance=ExtResource("2_xxcha")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+
+[node name="AStarGrid" type="Node3D" parent="."]
+top_level = true

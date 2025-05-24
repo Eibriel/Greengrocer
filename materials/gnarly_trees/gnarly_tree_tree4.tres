@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bh8dc6ueue30o"]
+
+[ext_resource type="Texture2D" uid="uid://bss5lptpq20k1" path="res://textures/gnarly_trees/gnarly_trees_tree4Color.png" id="1_yq3k5"]
+[ext_resource type="Texture2D" uid="uid://cj4a8jo7qsbv1" path="res://textures/gnarly_trees/gnarly_trees_tree4Normal.png" id="2_jrkde"]
+
+[resource]
+resource_name = "gnarly_tree_tree4"
+albedo_texture = ExtResource("1_yq3k5")
+roughness = 0.707183
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("2_jrkde")

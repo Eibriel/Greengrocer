@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://jk8ss1tbhc1"]
+
+[ext_resource type="Texture2D" uid="uid://ci5fvoeb8j7c3" path="res://textures/ceiling/Worn_Concrete_Ceiling_ugiscdsew_4K_BaseColor.jpg" id="1_12s2b"]
+[ext_resource type="Texture2D" uid="uid://cpy4i3gfevmep" path="res://textures/ceiling/Worn_Concrete_Ceiling_ugiscdsew_4K_AO.jpg" id="2_1uoar"]
+[ext_resource type="Texture2D" uid="uid://8nrarhn6tcep" path="res://textures/ceiling/Worn_Concrete_Ceiling_ugiscdsew_4K_Normal.jpg" id="3_hagnw"]
+[ext_resource type="Texture2D" uid="uid://bjocqro3set36" path="res://textures/ceiling/Worn_Concrete_Ceiling_ugiscdsew_4K_Roughness.jpg" id="4_xm1sc"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_12s2b")
+roughness_texture = ExtResource("4_xm1sc")
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("3_hagnw")
+ao_enabled = true
+ao_texture = ExtResource("2_1uoar")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true

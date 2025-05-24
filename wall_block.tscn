@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6csupcgbg0wr"]
+
+[ext_resource type="Material" uid="uid://jk8ss1tbhc1" path="res://materials/ceiling_material.tres" id="1_dcxpi"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_72b6x"]
+material = ExtResource("1_dcxpi")
+size = Vector2(4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcxpi"]
+size = Vector3(4, 4, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_25e6r"]
+size = Vector3(0.2, 4, 4)
+
+[node name="WallBlock" type="Node3D"]
+
+[node name="North" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2)
+mesh = SubResource("QuadMesh_72b6x")
+
+[node name="South" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 2)
+mesh = SubResource("QuadMesh_72b6x")
+
+[node name="East" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2, 2, 0)
+mesh = SubResource("QuadMesh_72b6x")
+
+[node name="West" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 2, 0)
+mesh = SubResource("QuadMesh_72b6x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -2.1)
+shape = SubResource("BoxShape3D_dcxpi")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.1)
+shape = SubResource("BoxShape3D_dcxpi")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 2, 0)
+shape = SubResource("BoxShape3D_25e6r")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 2, 0)
+shape = SubResource("BoxShape3D_25e6r")

@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://btyxey4k43l84"]
+
+[ext_resource type="Texture2D" uid="uid://duk88dyswmj0w" path="res://textures/street_light/StreetLightLight_BaseColor.png" id="1_wkd2x"]
+[ext_resource type="Texture2D" uid="uid://65ij1m18aciw" path="res://textures/street_light/StreetLightLight_em.png" id="2_lrqi0"]
+[ext_resource type="Texture2D" uid="uid://o6bc6nu053o6" path="res://textures/street_light/StreetLightLight_Metallic.png" id="3_u6mcp"]
+[ext_resource type="Texture2D" uid="uid://cmroi50j1qjux" path="res://textures/street_light/StreetLightLight_Normal.png" id="4_i15v3"]
+[ext_resource type="Texture2D" uid="uid://bmsg0gvsrcfjr" path="res://textures/street_light/StreetLightLight_Roughness.png" id="5_c6ci8"]
+
+[resource]
+resource_name = "street_light_light"
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+albedo_texture = ExtResource("1_wkd2x")
+metallic = 1.0
+metallic_texture = ExtResource("3_u6mcp")
+roughness_texture = ExtResource("5_c6ci8")
+emission_enabled = true
+emission_texture = ExtResource("2_lrqi0")
+normal_enabled = true
+normal_texture = ExtResource("4_i15v3")

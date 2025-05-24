@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bkcutgdpbxptj"]
+
+[ext_resource type="Texture2D" uid="uid://b8wn71i63snlv" path="res://blender/npcs/remy_textures/Remy_Top_Diffuse.png" id="1_kd8xw"]
+[ext_resource type="Texture2D" uid="uid://btol7lq1wi4o7" path="res://blender/npcs/remy_textures/Remy_Top_Normal.png" id="3_u8d83"]
+
+[resource]
+resource_name = "Remy_Topmat"
+cull_mode = 2
+albedo_texture = ExtResource("1_kd8xw")
+metallic_specular = 0.42
+metallic_texture_channel = 2
+roughness = 0.76
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_u8d83")
+rim_enabled = true
+rim = 0.15

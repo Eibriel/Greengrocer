@@ -145,8 +145,9 @@ func _process(delta: float) -> void:
 					#game_state.money += buy_amount * game_state.get_price(box.type)
 
 	#$SunRotation.rotate_z(0.1*delta)
-	$WorldEnvironment.environment.sky.sky_material.energy_multiplier = \
+	$WorldEnvironment.environment.sky.sky_material["shader_parameter/energy_multiplier"] = \
 		clamp(remap(game_state.time, 0.0, 60.0*14, 0.3, 0.0), 0.0, 0.3)
+	
 
 func end_day() -> void:
 	if game_state.time == DAY_TIME:

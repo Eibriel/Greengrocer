@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://nf8xfagnvru7"]
+
+[ext_resource type="Texture2D" uid="uid://dt5npnifxr4qi" path="res://textures/gnarly_trees/gnarly_trees_branchcolor.png" id="1_1vjdf"]
+[ext_resource type="Texture2D" uid="uid://dvt4jsfke88s1" path="res://textures/gnarly_trees/gnarly_trees_branchNormal.png" id="2_52rfb"]
+
+[resource]
+resource_name = "gnarly_tree_branches1"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_1vjdf")
+metallic_specular = 0.0
+roughness = 0.434315
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("2_52rfb")
