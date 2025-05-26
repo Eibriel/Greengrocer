@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dly7iychbwh5t"]
+[gd_scene load_steps=7 format=3 uid="uid://dly7iychbwh5t"]
 
 [ext_resource type="Script" uid="uid://cecla7rik6qyf" path="res://scale.gd" id="1_tr8fv"]
 [ext_resource type="ArrayMesh" uid="uid://dmyq21lxvcygf" path="res://mesh/stool.res" id="3_6s6ql"]
@@ -9,6 +9,9 @@ albedo_color = Color(0.34, 0.318013, 0.0102, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tr8fv"]
 size = Vector3(1.17798, 2.11209, 0.644775)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6s6ql"]
+size = Vector3(1.1405, 2.21924, 1.53687)
 
 [node name="Scale" type="Node3D"]
 script = ExtResource("1_tr8fv")
@@ -37,3 +40,9 @@ mesh = ExtResource("3_6s6ql")
 [node name="ScaleUssr" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0176336, 0.922007, 0.00621037)
 mesh = ExtResource("4_03o5o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00543213, 0.609619, -0.489868)
+shape = SubResource("BoxShape3D_6s6ql")

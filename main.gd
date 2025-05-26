@@ -20,6 +20,7 @@ var game_state: GameState
 
 #var npc_times:Array[float]
 var npc_time := 0.0
+var npc_debug:NPC
 
 const DAY_TIME := 60.0*13.0
 var running_time := false
@@ -130,7 +131,11 @@ func _process(delta: float) -> void:
 		npc_time = randf_range(0.0, 15.0)
 		var new_npc := preload("res://npc.tscn").instantiate()
 		$NPCs.add_child(new_npc)
-		new_npc.position = Vector3(0,0,14)
+		new_npc.position = Vector3(20,0,3)
+		
+		if not npc_debug or npc_debug.is_queued_for_deletion():
+			npc_debug = new_npc
+			$Control/StateChartDebugger.debug_node(npc_debug.get_node("StateChart"))
 		#var all_racks: Array[Rack] = []
 		#for r in $Racks.get_children():
 			#if r.has_box and r.current_woodbox.amount > 0:

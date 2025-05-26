@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxic37dug7o1e"]
+[gd_scene load_steps=8 format=3 uid="uid://cxic37dug7o1e"]
 
 [ext_resource type="Script" uid="uid://dyjurohr5r4ge" path="res://npc.gd" id="1_ideak"]
 [ext_resource type="PackedScene" uid="uid://bwoo8dv2r3pfs" path="res://blender/npcs/remy.blend" id="2_xxcha"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_bc6q4"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_mcvl2"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_d61ma"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_mcvl2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ideak"]
 albedo_color = Color(0.996078, 1, 0.105882, 1)
@@ -30,3 +34,174 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 
 [node name="AStarGrid" type="Node3D" parent="."]
 top_level = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+simplify_path = true
+debug_enabled = true
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_bc6q4")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("4_mcvl2")
+initial_state = NodePath("WalkingIn")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="WalkingIn" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To WaitingOutside" type="Node" parent="StateChart/CompoundState/WalkingIn"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../WaitingOutside")
+event = &"in_shop_front"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="WaitingOutside" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To TakingItem" type="Node" parent="StateChart/CompoundState/WaitingOutside"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../TakingItem")
+event = &"allowed_to_enter"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="To WalkingOut" type="Node" parent="StateChart/CompoundState/WaitingOutside"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../WalkingOut")
+event = &"bored_waiting_to_open"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="TakingItem" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("4_mcvl2")
+initial_state = NodePath("SearchingItem")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="SearchingItem" type="Node" parent="StateChart/CompoundState/TakingItem"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To WalkingToItem" type="Node" parent="StateChart/CompoundState/TakingItem/SearchingItem"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../WalkingToItem")
+event = &"item_found"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="To Checkout" type="Node" parent="StateChart/CompoundState/TakingItem/SearchingItem"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../../Checkout")
+event = &"all_items_grabbed"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="To WalkingOut" type="Node" parent="StateChart/CompoundState/TakingItem/SearchingItem"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../../WalkingOut")
+event = &"shop_complete"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="WalkingToItem" type="Node" parent="StateChart/CompoundState/TakingItem"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To CheckItemPrice" type="Node" parent="StateChart/CompoundState/TakingItem/WalkingToItem"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../CheckItemPrice")
+event = &"at_item_grabbing_position"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="CheckItemPrice" type="Node" parent="StateChart/CompoundState/TakingItem"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To GrabbingItem" type="Node" parent="StateChart/CompoundState/TakingItem/CheckItemPrice"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../GrabbingItem")
+event = &"item_grab_allowed"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="To SearchingItem" type="Node" parent="StateChart/CompoundState/TakingItem/CheckItemPrice"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../..")
+event = &"grabbing_complete"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="GrabbingItem" type="Node" parent="StateChart/CompoundState/TakingItem"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To SearchingItem" type="Node" parent="StateChart/CompoundState/TakingItem/GrabbingItem"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../..")
+event = &"grabbing_complete"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Checkout" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("4_mcvl2")
+initial_state = NodePath("WalkingToLine")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="WalkingToLine" type="Node" parent="StateChart/CompoundState/Checkout"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To HandingItem" type="Node" parent="StateChart/CompoundState/Checkout/WalkingToLine"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../HandingItem")
+event = &"at_scale"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="HandingItem" type="Node" parent="StateChart/CompoundState/Checkout"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/Checkout/HandingItem"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../Paying")
+event = &"all_items_handed"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Paying" type="Node" parent="StateChart/CompoundState/Checkout"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To WalkingOut" type="Node" parent="StateChart/CompoundState/Checkout/Paying"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../../WalkingOut")
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="WalkingOut" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[connection signal="state_processing" from="StateChart/CompoundState/WalkingIn" to="." method="_on_walking_in_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/WaitingOutside" to="." method="_on_waiting_outside_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/WaitingOutside" to="." method="_on_waiting_outside_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/TakingItem/SearchingItem" to="." method="_on_searching_item_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/TakingItem/SearchingItem" to="." method="_on_searching_item_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/TakingItem/WalkingToItem" to="." method="_on_walking_to_item_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/TakingItem/WalkingToItem" to="." method="_on_walking_to_item_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/TakingItem/CheckItemPrice" to="." method="_on_check_item_price_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/TakingItem/CheckItemPrice" to="." method="_on_check_item_price_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/TakingItem/GrabbingItem" to="." method="_on_grabbing_item_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/TakingItem/GrabbingItem" to="." method="_on_grabbing_item_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/Checkout/WalkingToLine" to="." method="_on_walking_to_line_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/Checkout/WalkingToLine" to="." method="_on_walking_to_line_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/Checkout/HandingItem" to="." method="_on_handing_item_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/Checkout/HandingItem" to="." method="_on_handing_item_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/WalkingOut" to="." method="_on_walking_out_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/WalkingOut" to="." method="_on_walking_out_state_processing"]

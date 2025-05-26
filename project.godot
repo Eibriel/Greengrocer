@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 Global="*res://global.gd"
 Items="*res://items.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+
 [input]
 
 left={
