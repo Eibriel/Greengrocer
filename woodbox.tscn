@@ -18,14 +18,14 @@ transform = Transform3D(-5.68248e-08, 0, 1.3, 0, 1.3, 0, -1.3, 0, -5.68248e-08, 
 mesh = ExtResource("2_1idd6")
 
 [node name="ItemName" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.717017, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.326231, 0.290359)
 text = "ItemName
 "
 font_size = 20
 outline_size = 6
 
 [node name="ItemAmount" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4975, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.106714, 0.290359)
 text = "ItemAmount
 "
 font_size = 20

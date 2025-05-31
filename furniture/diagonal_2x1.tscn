@@ -23,6 +23,17 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 
 [node name="Rack02" parent="Racks" instance=ExtResource("1_rvr4h")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 1.703, -1.065)
 
+[node name="NPCSlots" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.762328)
+
+[node name="Marker3D3" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(0.929332, 0, 0.369244, 0, 1, 0, -0.369244, 0, 0.929332, 0.595549, 0, 0.63802)
+
+[node name="Marker3D2" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(0.970771, 0, -0.240008, 0, 1, 0, 0.240008, 0, 0.970771, -0.803259, 0, 0.689446)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.347289, -0.143311)
 size = Vector3(1, 0.718504, 0.713379)

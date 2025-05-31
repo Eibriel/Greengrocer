@@ -1,24 +1,55 @@
-[gd_scene load_steps=7 format=3 uid="uid://dly7iychbwh5t"]
+[gd_scene load_steps=14 format=3 uid="uid://dly7iychbwh5t"]
 
 [ext_resource type="Script" uid="uid://cecla7rik6qyf" path="res://scale.gd" id="1_tr8fv"]
 [ext_resource type="ArrayMesh" uid="uid://dmyq21lxvcygf" path="res://mesh/stool.res" id="3_6s6ql"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_1i3r7"]
 [ext_resource type="ArrayMesh" uid="uid://8lux4pvd8ebv" path="res://mesh/scale_ussr/scale_ussr.res" id="4_03o5o"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_5x2be"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_dswrj"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_th1oe"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_dswrj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pt18m"]
 albedo_color = Color(0.34, 0.318013, 0.0102, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tr8fv"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5x2be"]
 size = Vector3(1.17798, 2.11209, 0.644775)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jqvvq"]
+size = Vector3(1.05341, 0.281101, 0.540222)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1i3r7"]
+size = Vector3(0.744141, 0.94182, 0.540222)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_6s6ql"]
-size = Vector3(1.1405, 2.21924, 1.53687)
+size = Vector3(2.00656, 2.21924, 0.55243)
 
 [node name="Scale" type="Node3D"]
 script = ExtResource("1_tr8fv")
 
+[node name="NPCSlots" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 1.0786)
+
+[node name="Marker3D2" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 1.82378)
+
+[node name="Marker3D3" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 2.60125)
+
+[node name="Marker3D4" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 3.4182)
+
+[node name="Marker3D5" type="Marker3D" parent="NPCSlots"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 4.0411)
+
+[node name="PlayerSlot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39123e-07, 0, -1.1445)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40271, 0)
-size = Vector3(1.1748, 1.03003, 0.479492)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.427004, 0.40271, 0)
+size = Vector3(2.02881, 1.03003, 0.479492)
 material = SubResource("StandardMaterial3D_pt18m")
 
 [node name="CursorArea" type="Area3D" parent="."]
@@ -27,22 +58,137 @@ collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CursorArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.887077, 0)
-shape = SubResource("BoxShape3D_tr8fv")
+shape = SubResource("BoxShape3D_5x2be")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29323, 0)
+[node name="ProductArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ProductArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00650007, 1.13017, -0.0072327)
+shape = SubResource("BoxShape3D_jqvvq")
+
+[node name="ScaleArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScaleArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995012, 1.46053, -0.0072327)
+shape = SubResource("BoxShape3D_1i3r7")
+debug_fill = false
+
+[node name="LabelQueueSize" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 1.76625, -0.128052)
 text = "10"
 
+[node name="LabelItemsInCounter" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 1.20949, -0.128052)
+text = "10"
+font_size = 10
+
+[node name="LabelItemsInScale" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, -1.05667, 1.56862, -0.107178)
+text = "10"
+font_size = 15
+
 [node name="Stool" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05397)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.814642)
 mesh = ExtResource("3_6s6ql")
 
 [node name="ScaleUssr" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0176336, 0.922007, 0.00621037)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01028, 0.922007, 0.00621037)
 mesh = ExtResource("4_03o5o")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00543213, 0.609619, -0.489868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.438462, 0.609619, 0.00235182)
 shape = SubResource("BoxShape3D_6s6ql")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_1i3r7")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="ParallelState" type="Node" parent="StateChart"]
+script = ExtResource("5_5x2be")
+metadata/_custom_type_script = "uid://c1vp0ojjvaby1"
+
+[node name="NPCStates" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("5_dswrj")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Idle" type="Node" parent="StateChart/ParallelState/NPCStates"]
+script = ExtResource("5_th1oe")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To ItemInCounter" type="Node" parent="StateChart/ParallelState/NPCStates/Idle"]
+script = ExtResource("7_dswrj")
+to = NodePath("../../ItemInCounter")
+event = &"npc_bring_item"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="ItemInCounter" type="Node" parent="StateChart/ParallelState/NPCStates"]
+unique_name_in_owner = true
+script = ExtResource("5_th1oe")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To ItemInScale" type="Node" parent="StateChart/ParallelState/NPCStates/ItemInCounter"]
+script = ExtResource("7_dswrj")
+to = NodePath("../../ItemInScale")
+event = &"player_weights_item"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="ItemInScale" type="Node" parent="StateChart/ParallelState/NPCStates"]
+unique_name_in_owner = true
+script = ExtResource("5_th1oe")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To Idle" type="Node" parent="StateChart/ParallelState/NPCStates/ItemInScale"]
+script = ExtResource("7_dswrj")
+to = NodePath("../../Idle")
+event = &"all_items_weighted"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="To ItemInCounter" type="Node" parent="StateChart/ParallelState/NPCStates/ItemInScale"]
+script = ExtResource("7_dswrj")
+to = NodePath("../../ItemInCounter")
+event = &"npc_bring_item"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="PlayerStates" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("5_dswrj")
+initial_state = NodePath("WithoutPlayer")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="WithoutPlayer" type="Node" parent="StateChart/ParallelState/PlayerStates"]
+script = ExtResource("5_th1oe")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To WithPlayer" type="Node" parent="StateChart/ParallelState/PlayerStates/WithoutPlayer"]
+script = ExtResource("7_dswrj")
+to = NodePath("../../WithPlayer")
+event = &"player_enters_scale"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="WithPlayer" type="Node" parent="StateChart/ParallelState/PlayerStates"]
+script = ExtResource("5_th1oe")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To WithoutPlayer" type="Node" parent="StateChart/ParallelState/PlayerStates/WithPlayer"]
+script = ExtResource("7_dswrj")
+to = NodePath("../../WithoutPlayer")
+event = &"player_leaves_scale"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[connection signal="state_entered" from="StateChart/ParallelState/NPCStates/ItemInCounter" to="." method="_on_item_in_counter_state_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/NPCStates/ItemInScale" to="." method="_on_item_in_scale_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/NPCStates/ItemInScale" to="." method="_on_item_in_scale_state_exited"]
+[connection signal="state_entered" from="StateChart/ParallelState/PlayerStates/WithoutPlayer" to="." method="_on_without_player_state_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/PlayerStates/WithPlayer" to="." method="_on_with_player_state_entered"]

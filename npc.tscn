@@ -37,7 +37,6 @@ top_level = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 simplify_path = true
-debug_enabled = true
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_bc6q4")
@@ -156,10 +155,28 @@ metadata/_custom_type_script = "uid://jk2jm1g6q853"
 script = ExtResource("5_d61ma")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="To HandingItem" type="Node" parent="StateChart/CompoundState/Checkout/WalkingToLine"]
+[node name="To WaitingInLine" type="Node" parent="StateChart/CompoundState/Checkout/WalkingToLine"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../WaitingInLine")
+event = &"at_line_slot"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="WaitingInLine" type="Node" parent="StateChart/CompoundState/Checkout"]
+script = ExtResource("5_d61ma")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="To HandingItem" type="Node" parent="StateChart/CompoundState/Checkout/WaitingInLine"]
 script = ExtResource("6_mcvl2")
 to = NodePath("../../HandingItem")
-event = &"at_scale"
+event = &"at_last_line_slot"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="To WalkingToLine" type="Node" parent="StateChart/CompoundState/Checkout/WaitingInLine"]
+script = ExtResource("6_mcvl2")
+to = NodePath("../../WalkingToLine")
+event = &"new_line_slot"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
@@ -201,6 +218,8 @@ metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 [connection signal="state_processing" from="StateChart/CompoundState/TakingItem/GrabbingItem" to="." method="_on_grabbing_item_state_processing"]
 [connection signal="state_entered" from="StateChart/CompoundState/Checkout/WalkingToLine" to="." method="_on_walking_to_line_state_entered"]
 [connection signal="state_processing" from="StateChart/CompoundState/Checkout/WalkingToLine" to="." method="_on_walking_to_line_state_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/Checkout/WaitingInLine" to="." method="_on_waitin_in_line_state_entered"]
+[connection signal="state_processing" from="StateChart/CompoundState/Checkout/WaitingInLine" to="." method="_on_waitin_in_line_state_processing"]
 [connection signal="state_entered" from="StateChart/CompoundState/Checkout/HandingItem" to="." method="_on_handing_item_state_entered"]
 [connection signal="state_processing" from="StateChart/CompoundState/Checkout/HandingItem" to="." method="_on_handing_item_state_processing"]
 [connection signal="state_entered" from="StateChart/CompoundState/WalkingOut" to="." method="_on_walking_out_state_entered"]

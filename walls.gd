@@ -1,5 +1,7 @@
 extends Node3D
 
+signal expanded
+
 const WALL_BLOCK = preload("res://wall_block.tscn")
 const size := Vector2i(6, 4)
 
@@ -63,6 +65,7 @@ func _process(delta: float) -> void:
 	for en in current_expansion+1:
 		for b in expansions[en]:
 			hide_block(active_blocks[b.x][b.y])
+	expanded.emit()
 
 func hide_block(block: Node3D) -> void:
 	block.position.y = -20

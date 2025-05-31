@@ -6,7 +6,8 @@ enum TASKS {
 	DROP,
 	RACKING,
 	TRASHING,
-	GRABBING_DISPLAY
+	GRABBING_DISPLAY,
+	SCALE
 }
 
 var current_task := TASKS.NONE
@@ -52,7 +53,11 @@ func _ready() -> void:
 		#npc_times.append(randf_range(0, 14*60))
 	#npc_times.sort()
 	
-	print(game_state.get_level_xp(76690*2))
+	%Walls.connect("expanded", _on_expansion)
+	
+	#print(game_state.get_level_xp(76690*2))
+	var tween_nav := create_tween()
+	tween_nav.tween_callback(rebuild_navigation_mesh).set_delay(1.0)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("notepad"):
@@ -85,13 +90,20 @@ func _process(delta: float) -> void:
 		Global.is_open = false
 		game_state.time = DAY_TIME
 	
+	if current_task == TASKS.SCALE:
+		var ss := Global.scale.get_player_slot()
+		if player.global_position != ss.global_position:
+			current_task = TASKS.NONE
+			Global.scale.player_in_scale(false)
+	
 	match current_task:
 		TASKS.GRABBING_WOODBOX:
+			#current_task = TASKS.NONE
 			grabbed_item.get_parent_node_3d().remove_child(grabbed_item)
 			if grabbed_item is Display:
 				$Racks.add_child(grabbed_item)
 			else:
-				add_child(grabbed_item)
+				$Furniture.add_child(grabbed_item)
 			var grab_transform := player.get_grab_transform()
 			grabbed_item.global_transform = grab_transform
 			grabbing_item = true
@@ -100,6 +112,7 @@ func _process(delta: float) -> void:
 			grabbed_item.global_position.y = 0
 			grabbed_item.global_rotation = Vector3.ZERO
 			grabbing_item = false
+			rebuild_navigation_mesh()
 		TASKS.RACKING:
 			current_task = TASKS.NONE
 			var rack_transform := current_rack.get_rack_transform()
@@ -131,11 +144,10 @@ func _process(delta: float) -> void:
 		npc_time = randf_range(0.0, 15.0)
 		var new_npc := preload("res://npc.tscn").instantiate()
 		$NPCs.add_child(new_npc)
-		new_npc.position = Vector3(20,0,3)
 		
 		if not npc_debug or npc_debug.is_queued_for_deletion():
 			npc_debug = new_npc
-			$Control/StateChartDebugger.debug_node(npc_debug.get_node("StateChart"))
+			#$Control/StateChartDebugger.debug_node(npc_debug.get_node("StateChart"))
 		#var all_racks: Array[Rack] = []
 		#for r in $Racks.get_children():
 			#if r.has_box and r.current_woodbox.amount > 0:
@@ -169,6 +181,9 @@ func release_action_button() -> void:
 	#task_timer = 0.0
 	#current_task = TASKS.NONE
 	pass
+
+func rebuild_navigation_mesh() -> void:
+	$NavigationRegion3D.bake_navigation_mesh()
 
 func build_ray() -> Dictionary:
 	var ray_range := 6.0
@@ -222,14 +237,20 @@ func fire_ray(button_index: int) -> void:
 		elif coll is TrashCan:
 			current_task = TASKS.TRASHING
 		elif coll is Scale:
-			var res:Array = coll.execute_queue()
-			if res.size() == 3:
-				var scale_type = res[0]
-				var scale_amount = res[1]
-				var scale_price = res[2]
-				# TODO price should be the price set at the moment
-				# the NPC took the item
-				game_state.money += scale_amount * scale_price
+			if current_task != TASKS.SCALE:
+				current_task = TASKS.SCALE
+				var ss := Global.scale.get_player_slot()
+				player.teleport(ss.global_position, Vector2(0, 180))
+				Global.scale.player_in_scale()
+			else:
+				var res:Array = coll.execute_queue()
+				if res.size() == 3:
+					var scale_type = res[0]
+					var scale_amount = res[1]
+					var scale_price = res[2]
+					# TODO price should be the price set at the moment
+					# the NPC took the item
+					game_state.money += scale_amount * scale_price
 		elif coll is OpenSign:
 			coll.change_state()
 			if Global.is_open:
@@ -275,13 +296,15 @@ func move_item(from: Woodbox, to: Woodbox) -> void:
 			#if grabbed_item.amount == 0:
 				#grabbed_item.type = Items.TYPE.EMPTY
 
+func _on_expansion() -> void:
+	rebuild_navigation_mesh()
 
 func _on_order_list_buy_completed(buying: Dictionary[String, int]) -> void:
 	for by in buying:
 		for _n in buying[by]:
 			var new_box := preload("res://woodbox.tscn").instantiate()
 			new_box.add(100, by)
-			new_box.position = Vector3(randf(), 0, 12+randf())
+			new_box.position = Vector3(randf(), 0, 6+randf())
 			add_child(new_box)
 
 
@@ -301,8 +324,8 @@ func _on_order_list_furniture_purchased(furniture: FurnitureRes) -> void:
 		# POTS
 		"POT_1x1":
 			new_furniture = preload("res://furniture/pot_1x1.tscn").instantiate()
-	new_furniture.position = Vector3(randf(), 0, 12+randf())
+	new_furniture.position = Vector3(randf(), 0, 6+randf())
 	if new_furniture is Display:
 		Global.racks.add_child(new_furniture)
 	else:
-		add_child(new_furniture)
+		$Furniture.add_child(new_furniture)
